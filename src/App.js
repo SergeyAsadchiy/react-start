@@ -9,21 +9,23 @@ function App() {
     {id: 2, title: 'Javascript 2', body: 'description'},
     {id: 3, title: 'Javascript 3', body: 'description'}
   ])
-  const [posts2] = useState([
-    {id: 1, title: 'Python 1', body: 'description'},
-    {id: 2, title: 'Python 2', body: 'description'},
-    {id: 3, title: 'Python 3', body: 'description'}
-  ])
 
   const createPost = (newPost) => {
     setPosts([...posts, newPost])
+  }
+  const removePost = (post) => {
+    setPosts(posts.filter(e => e.id !== post.id))
   }
 
   return (
     <div className="App">
       <PostForm create={createPost}/>
-      <PostList posts={posts} title={'Список постов по JS'} />
-      <PostList posts={posts2} title={'Список постов по Python'} />
+      {
+        posts.length
+          ? <PostList remove={removePost} posts={posts} title={'Список постов по JS'} />
+          : <h2 style={{marginTop: '20px', textAlign: 'center'}}>Посты не найдены</h2>
+      }
+
     </div>
   );
 }
