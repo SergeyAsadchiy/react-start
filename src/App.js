@@ -3,17 +3,15 @@ import PostItem from "./components/PostItem";
 import './styles/App.css'
 
 function App() {
-const [posts, setPost] = useState([
-  {id: 1, title: 'Javascript', text: 'description'},
-  {id: 2, title: 'Javascript', text: 'description'},
-  {id: 3, title: 'Javascript', text: 'description'}
-])
+  const [posts] = useState([
+    {id: 1, title: 'Javascript', text: 'description'},
+    {id: 2, title: 'Javascript', text: 'description'},
+    {id: 3, title: 'Javascript', text: 'description'}
+  ])
   return (
     <div className="App">
       {
-        posts.map(e => {
-          return <PostItem post={e} />
-        })
+        posts.map(post => <PostItem post={post} key={post.id}/>)
       }
     </div>
   );
