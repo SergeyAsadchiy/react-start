@@ -34,7 +34,9 @@ const PostForm = ({create}) => {
         value={post.body}
         onChange={e => setPost({...post, body: e.target.value})}
       />
-      <MyButton onClick={addNewPost}>Добавить пост</MyButton>
+      <MyButton onClick={addNewPost}>
+        Добавить пост
+      </MyButton>
     </form>
   );
 };

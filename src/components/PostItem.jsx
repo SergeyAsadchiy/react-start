@@ -13,7 +13,9 @@ const PostItem = (props) => {
         <div>{props.post.body}</div>
       </div>
       <div className="post__btn">
-        <MyButton onClick={removePost}>Удалить пост {props.number}</MyButton>
+        <MyButton onClick={removePost}>
+          Удалить пост {props.number}
+        </MyButton>
       </div>
     </div>
   );
