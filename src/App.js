@@ -28,6 +28,7 @@ function App() {
 
   const createPost = (newPost) => {
     setPosts([...posts, newPost])
+    setVisibleModal(false)
   }
   const removePost = (post) => {
     setPosts(posts.filter(e => e.id !== post.id))
