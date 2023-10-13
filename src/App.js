@@ -3,6 +3,8 @@ import './styles/App.css'
 import PostList from "./components/PostList";
 import PostForm from "./components/PostForm";
 import PostFilter from "./components/PostFilter";
+import MyModal from "./components/UI/MyModal/MyModal";
+import MyButton from "./components/UI/button/MyButton";
 
 function App() {
   const [posts, setPosts] = useState([
@@ -12,6 +14,7 @@ function App() {
   ])
 
   const [filter, setFilter] = useState({sort: '', query: ''})
+  const [visibleModal, setVisibleModal] = useState(false)
 
   const sortedPosts = useMemo(() => {
     return filter.sort
@@ -32,9 +35,15 @@ function App() {
 
   return (
     <div className="App">
-      <PostForm create={createPost}/>
-      <hr style={{margin: '15px 0'}}/>
-
+      <MyButton
+        style={{marginTop: '15px'}}
+        onClick={() => setVisibleModal(true)}
+      >
+        Добавить пост
+      </MyButton>
+      <MyModal visible={visibleModal} setVisible={setVisibleModal}>
+        <PostForm create={createPost}/>
+      </MyModal>
       <PostFilter
         filter={filter}
         setFilter={setFilter}
