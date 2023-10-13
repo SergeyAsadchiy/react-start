@@ -6,3 +6,8 @@
     border: 1px solid teal;
     border-radius: 5px;
 }
+
+.myBtnDisabled {
+    color: darkgrey;
+    border-color: darkgray;
+}

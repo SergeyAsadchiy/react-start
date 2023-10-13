@@ -21,7 +21,7 @@ const PostForm = ({create}) => {
   }
 
   return (
-    <form style={{marginTop: '25px'}} action="">
+    <form style={{marginTop: '25px', textAlign: 'center'}} >
       <MyInput
         type="text"
         placeholder="Название поста"
@@ -34,7 +34,11 @@ const PostForm = ({create}) => {
         value={post.body}
         onChange={e => setPost({...post, body: e.target.value})}
       />
-      <MyButton onClick={addNewPost}>
+      <MyButton
+        style={{marginTop: '25px'}}
+        disabled={!post.title || !post.body}
+        onClick={addNewPost}
+      >
         Добавить пост
       </MyButton>
     </form>
