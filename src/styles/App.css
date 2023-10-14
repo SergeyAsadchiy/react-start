@@ -22,7 +22,13 @@
     background-color: #efe;
     margin-top: 20px;
     justify-content: space-between;
+    row-gap: 15px;
 }
+
+.post__btn {
+   margin: auto;
+}
+
 .post__btn button {
     padding: 3px 10px;
 }
