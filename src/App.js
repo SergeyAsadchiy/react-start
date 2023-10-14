@@ -9,17 +9,16 @@ import {usePosts} from "./hooks/usePosts";
 import PostsService from "./API/PostsService";
 import Loader from "./components/UI/Loader/Loader";
 import {useFetching} from "./hooks/useFetching";
-import {getPagesArray, getPagesCount} from "./utils/pages";
+import {getPagesCount} from "./utils/pages";
+import Pagination from "./components/UI/pagination/Pagination";
 
 function App() {
   const [posts, setPosts] = useState([])
   const [filter, setFilter] = useState({sort: '', query: ''})
   const [visibleModal, setVisibleModal] = useState(false)
-  const [limit, setLimit] = useState(5)
+  const [limit] = useState(5)
   const [page, setPage] = useState(1)
   const [totalPages, setTotalPages] = useState(0)
-
-  const pagesArray = getPagesArray(totalPages)
 
   const [fetchPosts, isPostsLoading, postsError] = useFetching(async (limit, page) => {
     const response = await PostsService.getAll(limit, page)
@@ -75,20 +74,11 @@ function App() {
         />
       }
 
-      <div className={"pagination__wrapper"}>
-        {pagesArray.map(e =>
-          <span
-            onClick={() =>  changePage(e)}
-            key={e}
-            className={page === e
-              ? "pagination__page pagination__current"
-              : "pagination__page"
-            }
-          >
-             {e}
-           </span>
-        )}
-      </div>
+      <Pagination
+        totalPages={totalPages}
+        page={page}
+        changePage={changePage}
+      />
     </div>
   );
 }
