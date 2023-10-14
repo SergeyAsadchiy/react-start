@@ -9,20 +9,30 @@ import {usePosts} from "./hooks/usePosts";
 import PostsService from "./API/PostsService";
 import Loader from "./components/UI/Loader/Loader";
 import {useFetching} from "./hooks/useFetching";
+import {getPagesArray, getPagesCount} from "./utils/pages";
 
 function App() {
   const [posts, setPosts] = useState([])
   const [filter, setFilter] = useState({sort: '', query: ''})
   const [visibleModal, setVisibleModal] = useState(false)
-  const [fetchPosts, isPostsLoading, postsError] = useFetching(async () => {
-    const posts = await PostsService.getAll()
-    setPosts(posts)
+  const [limit, setLimit] = useState(5)
+  const [page, setPage] = useState(1)
+  const [totalPages, setTotalPages] = useState(0)
+
+  const pagesArray = getPagesArray(totalPages)
+
+  const [fetchPosts, isPostsLoading, postsError] = useFetching(async (limit, page) => {
+    const response = await PostsService.getAll(limit, page)
+    setPosts(response.data)
+    const totalCount = response.headers['x-total-count']
+    setTotalPages(getPagesCount(totalCount, limit))
   })
 
   const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query)
 
   useEffect(() => {
-    fetchPosts()
+    fetchPosts(limit, page)
+    // eslint-disable-next-line
   }, [])
 
   const createPost = (newPost) => {
@@ -32,15 +42,13 @@ function App() {
   const removePost = (post) => {
     setPosts(posts.filter(e => e.id !== post.id))
   }
+  const changePage = (page) => {
+    setPage(page)
+    fetchPosts(limit, page)
+  }
 
   return (
     <div className="App">
-      <MyButton
-        style={{marginRight: '10px'}}
-        onClick={fetchPosts}
-      >
-        Получить посты с сервера
-      </MyButton>
       <MyButton
         style={{marginTop: '15px'}}
         onClick={() => setVisibleModal(true)}
@@ -58,8 +66,8 @@ function App() {
       <h3>Произошла ошибка: {postsError}</h3>}
       {isPostsLoading
         ? <div style={{display: 'flex', justifyContent: 'center', marginTop: '50px'}}>
-            <Loader/>
-          </div>
+          <Loader/>
+        </div>
         : <PostList
           remove={removePost}
           posts={sortedAndSearchedPosts}
@@ -67,6 +75,20 @@ function App() {
         />
       }
 
+      <div className={"pagination__wrapper"}>
+        {pagesArray.map(e =>
+          <span
+            onClick={() =>  changePage(e)}
+            key={e}
+            className={page === e
+              ? "pagination__page pagination__current"
+              : "pagination__page"
+            }
+          >
+             {e}
+           </span>
+        )}
+      </div>
     </div>
   );
 }

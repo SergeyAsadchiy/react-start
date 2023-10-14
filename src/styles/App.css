@@ -1,49 +1,67 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 #root {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .App {
-    width: 800px;
-    color: #333;
+  width: 800px;
+  color: #333;
 }
 
 .post {
-    display: flex;
-    padding: 15px;
-    border: 2px solid teal;
-    border-radius: 5px;
-    background-color: #efe;
-    margin-top: 20px;
-    justify-content: space-between;
-    column-gap: 15px;
+  display: flex;
+  padding: 15px;
+  border: 2px solid teal;
+  border-radius: 5px;
+  background-color: #efe;
+  margin-top: 20px;
+  justify-content: space-between;
+  column-gap: 15px;
 }
 
 .post__btn {
-   margin: auto;
+  margin: auto;
 }
 
 .post__btn button {
-    padding: 3px 10px;
+  padding: 3px 10px;
 }
 
 .post-enter {
-    opacity: 0;
+  opacity: 0;
 }
 .post-enter-active {
-    opacity: 1;
-    transition: opacity 500ms ease-in;
+  opacity: 1;
+  transition: opacity 500ms ease-in;
 }
 .post-exit {
-    opacity: 1;
+  opacity: 1;
 }
 .post-exit-active {
-    opacity: 0;
-    transition: opacity 500ms ease-in;
+  opacity: 0;
+  transition: opacity 500ms ease-in;
+}
+
+.pagination__wrapper {
+  margin: 30px 0;
+  display: flex;
+}
+.pagination__page {
+  margin: 2px;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid teal;
+  cursor: pointer;
+}
+
+.pagination__current {
+  background-color: #d8e8d8;
+  border: 2px solid teal;
+  font-weight: bold;
 }
