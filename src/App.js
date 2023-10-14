@@ -7,6 +7,7 @@ import MyModal from "./components/UI/MyModal/MyModal";
 import MyButton from "./components/UI/button/MyButton";
 import {usePosts} from "./hooks/usePosts";
 import PostsService from "./API/PostsService";
+import Loader from "./components/UI/Loader/Loader";
 
 function App() {
   const [posts, setPosts] = useState([])
@@ -22,7 +23,7 @@ function App() {
     setTimeout(() => {
       setPosts(posts)
       setIsPostLoading(false)
-    }, 1000)
+    }, 10000)
   }
 
   useEffect(() => {
@@ -59,7 +60,9 @@ function App() {
         setFilter={setFilter}
       />
       {isPostsLoading
-        ? <h2>Загрузка постов...</h2>
+        ? <div style={{display: 'flex', justifyContent: 'center', marginTop: '50px'}}>
+            <Loader/>
+          </div>
         : <PostList
           remove={removePost}
           posts={sortedAndSearchedPosts}
