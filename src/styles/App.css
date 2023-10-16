@@ -26,11 +26,13 @@
   column-gap: 15px;
 }
 
-.post__btn {
+.post__buttons {
   margin: auto;
+  display: flex;
+  column-gap: 10px;
 }
 
-.post__btn button {
+.post__buttons button {
   padding: 3px 10px;
 }
 
@@ -47,4 +49,9 @@
 .post-exit-active {
   opacity: 0;
   transition: opacity 500ms ease-in;
+}
+
+.post-page {
+  display: flex;
+  flex-direction: column;
 }
