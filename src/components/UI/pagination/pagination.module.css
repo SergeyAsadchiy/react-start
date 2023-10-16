@@ -1,0 +1,17 @@
+.pagination__wrapper {
+    margin: 30px 0;
+    display: flex;
+}
+.pagination__page {
+    margin: 2px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid teal;
+    cursor: pointer;
+}
+
+.pagination__current {
+    background-color: #d8e8d8;
+    border: 2px solid teal;
+    font-weight: bold;
+}
