@@ -5,14 +5,21 @@ import Posts from "../pages/Posts";
 import Error from "../pages/Error";
 import PostPage from "../pages/PostPage";
 
+const routes = [
+  {path: '/about', element: <About/>},
+  {path: '/posts', element: <Posts/>},
+  {path: '/posts/:id', element: <PostPage/>},
+  {path: '/', element: <Posts/>},
+  {path: '*', element: <Error/>},
+
+]
+
 const AppRouter = () => {
   return (
     <Routes>
-      <Route path="/about" element={<About/>}/>
-      <Route path="/posts" element={<Posts/>}/>
-      <Route path="/posts/:id" element={<PostPage/>}/>
-      <Route path="/" element={<Posts/>}/>
-      <Route path="*" element={<Error/>}/>
+      {routes.map(route =>
+        <Route path={route.path} element={route.element}/>
+      )}
     </Routes>
   );
 };
