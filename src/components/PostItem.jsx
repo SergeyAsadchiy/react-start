@@ -2,9 +2,9 @@ import React from 'react';
 import MyButton from "./UI/button/MyButton";
 import { useNavigate } from 'react-router-dom';
 const PostItem = (props) => {
-  const router = useNavigate()
+  const navigate = useNavigate()
   const openPost = (id) => {
-    return router(`/posts/${id}`)
+    return navigate(`/posts/${id}`)
   }
   const removePost = () => {
     return props.remove(props.post)
