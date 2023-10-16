@@ -10,7 +10,7 @@ const Pagination = ({totalPages, page, changePage}) => {
           onClick={() =>  changePage(e)}
           key={e}
           className={page === e
-            ? classes.pagination__page + ' ' + classes.pagination__current
+            ? `${classes.pagination__page} ${classes.pagination__current}`
             : classes.pagination__page
           }
         >
